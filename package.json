@@ -1,0 +1,22 @@
+{
+  "name": "service-worker-side-templating-app",
+  "version": "1.0.0",
+  "description": "An example app that uses service-worker-side templating with Handlebars.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "service worker",
+    "handlebars",
+    "service worker side templating",
+    "service worker rendering",
+    "progressive web apps",
+    "offline first"
+  ],
+  "author": "Konstantin Münster",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.12.0"
+  }
+}
