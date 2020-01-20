@@ -12,17 +12,12 @@
     <header id="header"><h1>SWST APP</h1></header>
     <main id="main">
       <a href="/">All Posts</a>
-      <script id="template" type="text/x-handlebars-template">
-        <div class="entry">
-          <h1>{{title}}</h1>
-          <div class="body">
-            {{body}}
-          </div>
-        </div>
-      </script>
+      <div id="output"></div>
     </main>
     <footer id="footer">A Service-Worker-Side Templating App</footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+    <script src="../js/handlebars.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../templates/post.precompiled.js"></script>
+    <script src="../sw.js"></script>
   </body>
 </html>

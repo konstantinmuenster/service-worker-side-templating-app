@@ -1,42 +1,46 @@
-var API = "https://jsonplaceholder.typicode.com/posts/";
+var API = "https://jsonplaceholder.typicode.com/posts";
 var path = window.location.pathname;
-var template = document.getElementById("template").innerHTML;
-var compiledTemplate = Handlebars.compile(template);
-var target = document.getElementById("main");
 
 function fetchAllPosts() {
   fetch(API)
-  .then(function(res) {
-    return res.json();
-  })
-  .then(function(data) {
-    html = compiledTemplate(data);
-    target.innerHTML += html;
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(data) {
+      var template = Handlebars.templates.index;
+      html = template(data);
+      document.getElementById("output").innerHTML = html;
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
 function fetchPost(id) {
-  fetch(API + id) 
-  .then(function(res) {
-    return res.json()
-  })
-  .then(function(data) {
-    html = compiledTemplate(data);
-    target.innerHTML += html;
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+  fetch(API + "/" + id)
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(data) {
+      var template = Handlebars.templates.post;
+      html = template(data);
+      document.getElementById("output").innerHTML = html;
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
-  if (path.match(/^\/$/)) {
-    // Home page shows a list of all posts
-    fetchAllPosts()
-  } else if (path.match(/\/post\//)) {
-    // Post page shows individual post
-    var postId = window.location.search.split("=")[1];
-    fetchPost(postId);
-  }
+if (path.match(/^\/$/)) {
+  fetchAllPosts();
+} else if (path.match(/\/post\//)) {
+  var url = new URL(window.location);
+  var postId = url.searchParams.get("id");
+  fetchPost(postId);
+}
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker.register("/sw.js");
+  });
+}
